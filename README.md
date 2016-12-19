@@ -32,11 +32,6 @@ Name | Version
 ```twig
 "{{ 'Default ESC[34mBlue'|ansitohtml }}"
 ```
- * Tag support :
-```twig
-"{% ansitohtml %}Default ESC[34mBlue{% ansitohtml %}"
-```
-
 
 # Installation
 
