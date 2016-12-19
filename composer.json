@@ -1,0 +1,39 @@
+{
+    "name": "neilime/ansi-to-html-twig-extension",
+    "type": "library",
+    "description": "Twig extension to convert ANSI escapes (terminal formatting/color codes) to HTML ",
+    "keywords": ["twig", "ANSI", "escapes", "highlight", "html", "convert", "filter"],
+    "license": "MIT",
+    "homepage": "http://neilime.github.io/ansi-to-html-twig-extension/",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Neilime",
+            "homepage": "https://github.com/neilime",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/neilime/nsi-to-html-twig-extension/issues"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Twig\\": "src/Twig"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TestSuite\\": "tests/TestSuite"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "twig/twig": "1.*.*",
+        "neilime/ansi-escapes-to-html": "1.*.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*.*",
+        "satooshi/php-coveralls": "1.*.*"
+    }
+}

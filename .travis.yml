@@ -1,0 +1,47 @@
+language: php
+
+sudo: false
+
+env:
+  global:
+  secure: "QUnBlLix+kCrpi/li7BRqOdPbpSYNNyw/+8zVyY3VsnpU/j1uG+TZyk2dEMsFvkul9Zl5SnqdT8mOY+EpL5QfoG5BWyQRLRoiAHuZdkJ3bI4goNWuc6b6MpQcoW1IcPz8ZhTdDM21xR382yWNP59uqn1JQcwrY0yjyZfm27RyFyOf+3k9yNcdAwoLy4YuboQocYw80Zdsqb9OsNDXkM69y9MlPM1QcClTeNEIZRmWcsTVmTpWCeKCAoQjFH05e907SuI13fohU6YftjKutc4mvuumi6mB5SLMGLxCoRUnI+47ze65VFWweLl/el7vbmF6QG9a+Allem6TiYJkQymI/rz+C7nIQtmaayw74datN3RqJNwCA3CN8Vithv+CKhwWml/Gk726/7hufO8XMqJMGyDCwgd5zDNcaxt0CT46llaE8Bhoq9x8PD5U8ZxcDTCY/bzf4+2DgVfzk351wCFPYsCYXaktzud2VanAtlzFn+D6cXFkcMrrCxczjRMuW2xFc0kegOXLfGI5CIgonzC/CqbnMr2wbuyxAyd0RbMv5DNrl+MY8ls920tH5GRHlcencn+jqi1hy9KCAb872e9p5DcOkYFmtvHJAH4lYfM9i1V2fMTaO/o0HSJ/UUh0nKKHOXNIvOp/PmB/7z/fG+DuWFA5lRjfT6uSPoF09fpdIU="
+
+matrix:
+  include:
+    - php: '5.3'
+    - php: '5.4'
+    - php: '5.5'
+    - php: '5.6'
+      env:
+        - EXECUTE_AFTER_SCRIPT=true
+    - php: '7.0'
+    - php: '7.1'
+
+addons:
+  apt:
+    packages:
+    - graphviz
+
+cache:
+  directories:
+  - "$HOME/.composer/cache"
+
+before_install:
+- mkdir -p ~/.composer
+- cp .travis.composer.json ~/.composer/config.json
+- composer self-update
+- composer install --prefer-dist --dev
+- pear channel-discover pear.phpdoc.org
+- pear install phpdoc/phpDocumentor
+- phpenv rehash
+
+before_script:
+- mkdir -p build/{logs,coverage,phpdoc}
+
+script:
+- cd tests
+- phpunit -d max_execution_time=0 --coverage-text --coverage-clover ../build/logs/clover.xml --coverage-html ../build/coverage/
+- cd ..
+
+after_script:
+- if [[ $EXECUTE_AFTER_SCRIPT == 'true' ]]; then php vendor/bin/coveralls --verbose --config;fi
