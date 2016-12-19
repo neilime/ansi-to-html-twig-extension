@@ -28,7 +28,8 @@ Name | Version
 # Features
 
  * Filter support :
-```twig
+ 
+```Twig
 {{ 'Default ESC[34mBlue'|ansitohtml }}
 ```
 
@@ -53,12 +54,15 @@ The Twig extension provides the `ansitohtml` tag and filter support.
 Assumed that you are using [composer](http://getcomposer.org) autoloading.
 
 Adds the extension to the Twig environment:
+
 ```php
 $twig->addExtension(new \Twig\Extension\AnsiToHtmlExtension());
 ```
+
 ### Twig Token Parser
 
 The Twig token parser provides the `ansitohtml` tag :
+
 ```php
 $twig->addTokenParser(new \Twig\TokenParser\AnsiToHtmlTokenParser());
 ```
