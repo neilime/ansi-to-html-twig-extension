@@ -17,16 +17,6 @@ class AnsiToHtmlTokenParserTest extends \Twig_Test_NodeTestCase
         $this->assertEquals($oBody, $oNode->getNode('body'));
     }
 
-    /**
-     * Test that the generated code looks as expected
-     *
-     * @dataProvider getTests
-     */
-    public function testCompile($oNode, $source, $environment = null)
-    {
-        parent::testCompile($oNode, $source, $environment);
-    }
-
     public function getTests()
     {
         $sTest = 'Default [34mBlue';

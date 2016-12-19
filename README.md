@@ -29,7 +29,7 @@ Name | Version
 
  * Filter support :
 ```twig
-"{{ 'Default ESC[34mBlue'|ansitohtml }}"
+{{ 'Default ESC[34mBlue'|ansitohtml }}
 ```
 
 # Installation
