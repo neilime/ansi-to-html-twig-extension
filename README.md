@@ -1,5 +1,4 @@
-Ansi-To-Html Twig Extension
-=======================
+# Ansi-To-Html Twig Extension
 
 [![Build Status](https://travis-ci.org/neilime/ansi-to-html-twig-extension.svg?branch=master)](https://travis-ci.org/neilime/ansi-to-html-twig-extension)
 [![Latest Stable Version](https://poser.pugx.org/neilime/ansi-to-html-twig-extension/v/stable.svg)](https://packagist.org/packages/neilime/ansi-to-html-twig-extension)
