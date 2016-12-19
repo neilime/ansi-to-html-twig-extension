@@ -29,12 +29,12 @@ Name | Version
 # Features
 
  * Filter support :
-```Twig
-{{ 'Default ESC[34mBlue'|ansitohtml }}
+```twig
+"{{ 'Default ESC[34mBlue'|ansitohtml }}"
 ```
  * Tag support :
-```Twig
-{% ansitohtml %}Default ESC[34mBlue{% ansitohtml %}
+```twig
+"{% ansitohtml %}Default ESC[34mBlue{% ansitohtml %}"
 ```
 
 
