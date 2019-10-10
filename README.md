@@ -1,11 +1,11 @@
 # Ansi-To-Html Twig Extension
 
-[![Build Status](https://travis-ci.org/neilime/zf-assets-bundle.svg?branch=master)](https://travis-ci.org/neilime/zf-assets-bundle)
-[![Coverage Status](https://coveralls.io/repos/github/neilime/zf-assets-bundle/badge.svg)](https://coveralls.io/github/neilime/zf-assets-bundle)
-[![Latest Stable Version](https://poser.pugx.org/neilime/zf-assets-bundle/v/stable)](https://packagist.org/packages/neilime/zf-assets-bundle)
-[![Total Downloads](https://poser.pugx.org/neilime/zf-assets-bundle/downloads)](https://packagist.org/packages/neilime/zf-assets-bundle)
-[![License](https://poser.pugx.org/neilime/zf-assets-bundle/license)](https://packagist.org/packages/neilime/zf-assets-bundle)
-[![Beerpay](https://beerpay.io/neilime/zf-assets-bundle/badge.svg)](https://beerpay.io/neilime/zf-assets-bundle) 
+[![Build Status](https://travis-ci.org/neilime/ansi-to-html-twig-extension.svg?branch=master)](https://travis-ci.org/neilime/ansi-to-html-twig-extension)
+[![Coverage Status](https://coveralls.io/repos/github/neilime/ansi-to-html-twig-extension/badge.svg)](https://coveralls.io/github/neilime/ansi-to-html-twig-extension)
+[![Latest Stable Version](https://poser.pugx.org/neilime/ansi-to-html-twig-extension/v/stable)](https://packagist.org/packages/neilime/ansi-to-html-twig-extension)
+[![Total Downloads](https://poser.pugx.org/neilime/ansi-to-html-twig-extension/downloads)](https://packagist.org/packages/neilime/ansi-to-html-twig-extension)
+[![License](https://poser.pugx.org/neilime/ansi-to-html-twig-extension/license)](https://packagist.org/packages/neilime/ansi-to-html-twig-extension)
+[![Beerpay](https://beerpay.io/neilime/ansi-to-html-twig-extension/badge.svg)](https://beerpay.io/neilime/ansi-to-html-twig-extension) 
 
 📢 [Twig](https://twig.symfony.com) extension to convert ANSI escapes (terminal formatting/color codes) to HTML
 
