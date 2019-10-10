@@ -20,6 +20,6 @@
 # Documentation
 
 1. [Installation](https://github.com/neilime/ansi-to-html-twig-extension/wiki/Installation)
-2. [Installation](https://github.com/neilime/ansi-to-html-twig-extension/wiki/Usage)
+2. [Usage](https://github.com/neilime/ansi-to-html-twig-extension/wiki/Usage)
 3. [Code Coverage](https://coveralls.io/github/neilime/ansi-to-html-twig-extension)
 4. [PHP Doc](https://neilime.github.io/ansi-to-html-twig-extension/phpdoc)
