@@ -2,7 +2,7 @@
 
 namespace TestSuite\Twig\Extension;
 
-class AnsiToHtmlExtensionTest extends \PHPUnit_Framework_TestCase
+class AnsiToHtmlExtensionTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testParseAnsiToHtml()

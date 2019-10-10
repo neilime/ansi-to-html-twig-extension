@@ -16,7 +16,6 @@
     "support": {
         "issues": "https://github.com/neilime/nsi-to-html-twig-extension/issues"
     },
-    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Twig\\": "src/Twig"
