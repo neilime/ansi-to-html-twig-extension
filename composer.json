@@ -28,7 +28,7 @@
     },
     "require": {        
         "php": "^7.2",
-        "twig/twig": "^2.14",
+        "twig/twig": "^2.15",
         "neilime/ansi-escapes-to-html": "^2.0"
     },
     "require-dev": {
