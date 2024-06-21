@@ -29,7 +29,7 @@
     "require": {        
         "php": "^7.2",
         "twig/twig": "^3.10",
-        "neilime/ansi-escapes-to-html": "^2.0"
+        "neilime/ansi-escapes-to-html": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5.38"
