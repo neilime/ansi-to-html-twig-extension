@@ -1,41 +1,70 @@
 {
-    "name": "neilime/ansi-to-html-twig-extension",
-    "type": "library",
-    "description": "Twig extension to convert ANSI escapes (terminal formatting/color codes) to HTML ",
-    "keywords": ["twig", "ANSI", "escapes", "highlight", "html", "convert", "filter"],
-    "license": "MIT",
-    "homepage": "http://neilime.github.io/ansi-to-html-twig-extension/",
-    "minimum-stability": "stable",
-    "authors": [
-        {
-            "name": "Neilime",
-            "homepage": "https://github.com/neilime",
-            "role": "Developer"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/neilime/nsi-to-html-twig-extension/issues"
+  "name": "neilime/ansi-to-html-twig-extension",
+  "type": "library",
+  "description": "Twig extension to convert ANSI escapes (terminal formatting/color codes) to HTML ",
+  "keywords": [
+    "twig",
+    "ANSI",
+    "escapes",
+    "highlight",
+    "html",
+    "convert",
+    "filter"
+  ],
+  "license": "MIT",
+  "homepage": "http://neilime.github.io/ansi-to-html-twig-extension/",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Neilime",
+      "homepage": "https://github.com/neilime",
+      "role": "Developer"
     },
-    "autoload": {
-        "psr-4": {
-            "Twig\\": "src/Twig"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "TestSuite\\": "tests/TestSuite"
-        }
-    },
-    "require": {        
-        "php": "^7.2",
-        "twig/twig": "^3.10",
-        "neilime/ansi-escapes-to-html": "^3.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.6.19"
-    },
-    "scripts": {
-        "test": "cd tests && phpunit -d max_execution_time=0 && cd ..",
-        "test:ci": "cd tests && phpunit -d max_execution_time=0 --coverage-text --coverage-clover ../build/logs/clover.xml --coverage-html ../build/coverage/ && cd .."
+    {
+      "name": "ESCEMI",
+      "homepage": "https://github.com/escemi-tech",
+      "role": "Developer"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/neilime/ansi-to-html-twig-extension/issues"
+  },
+  "autoload": {
+    "psr-4": {
+      "Twig\\": "src/Twig"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TestSuite\\": "tests/TestSuite"
+    }
+  },
+  "require": {
+    "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+    "twig/twig": "^3.10",
+    "neilime/ansi-escapes-to-html": "^4.0"
+  },
+  "require-dev": {
+    "pcov/clobber": "^2.0",
+    "phpunit/phpunit": "^9.6.19"
+  },
+  "scripts": {
+    "test": "phpunit --colors --configuration tests/phpunit.xml",
+    "test:ci": "@test -d pcov.enabled=1 -d max_execution_time=0 --coverage-text --coverage-clover ./build/logs/clover.xml --coverage-html ./build/coverage/",
+    "php-cs-fixer": "@php-cs-fixer:fix --dry-run",
+    "php-cs-fixer:fix": "tools/vendor/bin/php-cs-fixer fix --show-progress=dots --diff --config=.php-cs-fixer.dist.php",
+    "stan": "tools/vendor/bin/phpstan analyse --level 5 src",
+    "ci": [
+      "@php-cs-fixer",
+      "@stan",
+      "@test:ci"
+    ]
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  }
 }

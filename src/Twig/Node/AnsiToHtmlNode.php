@@ -2,35 +2,32 @@
 
 namespace Twig\Node;
 
+use Twig\Node\Node;
+use Twig\Compiler;
+
 /**
  * Represents a AnsiToHtml node, it parses ansi escapes content as html.
  */
-class AnsiToHtmlNode extends \Twig_Node
+class AnsiToHtmlNode extends Node
 {
+    public const TAG = 'ansitohtml';
 
-    /**
-     * Constructor
-     * @param array $aParams
-     * @param string $sBody
-     * @param int $iLine
-     * @param string $sTag
-     */
-    public function __construct($aParams, $sBody, $iLine, $sTag)
+    public function __construct(array $attributes, Node $body, int $lineno, string $tag = self::TAG)
     {
-        parent::__construct(array('body' => $sBody), $aParams, $iLine, $sTag);
+        parent::__construct(
+            nodes: ['body' => $body],
+            attributes: $attributes,
+            lineno: $lineno,
+            tag: $tag,
+        );
     }
 
-    /**
-     * @param \Twig_Compiler $oCompiler
-     */
-    public function compile(\Twig_Compiler $oCompiler)
+    public function compile(Compiler $compiler)
     {
-        $oCompiler
-                ->addDebugInfo($this)
-                ->write('ob_start();' . PHP_EOL)
-                ->subcompile($this->getNode('body'))
-                ->write('$sSource = rtrim(ob_get_clean());' . PHP_EOL)
-                ->write('$oHighlighter = new \\AnsiEscapesToHtml\\Highlighter();' . PHP_EOL)
-                ->write('echo $oHighlighter->toHtml($sSource) . PHP_EOL;' . PHP_EOL);
+        $compiler
+            ->addDebugInfo($this)
+            ->write('ob_start();' . PHP_EOL)
+            ->subcompile($this->getNode('body'))
+            ->write('echo (new \\AnsiEscapesToHtml\\Highlighter())->toHtml(rtrim(ob_get_clean())) . PHP_EOL;' . PHP_EOL);
     }
 }

@@ -2,27 +2,30 @@
 
 namespace TestSuite\Twig\Extension;
 
-class AnsiToHtmlExtensionTest extends \PHPUnit\Framework\TestCase
-{
+use PHPUnit\Framework\TestCase;
+use Twig\Loader\ArrayLoader;
+use Twig\Environment;
+use Twig\Extension\AnsiToHtmlExtension;
 
+class AnsiToHtmlExtensionTest extends TestCase
+{
     public function testParseAnsiToHtml()
     {
 
-        $sTest = 'Default [34mBlue';
+        $test = 'Default [34mBlue';
 
-        $oLoader = new \Twig_Loader_Array(array('index' => '{{ "' . $sTest . '"|ansitohtml }}'));
-        $oTwig = new \Twig_Environment($oLoader, array('debug' => true, 'cache' => false));
-        $oTwig->addExtension(new \Twig\Extension\AnsiToHtmlExtension());
+        $loader = new ArrayLoader(['index' => '{{ "' . $test . '"|ansitohtml }}']);
+        $twig = new Environment($loader, ['debug' => true, 'cache' => false]);
+        $twig->addExtension(new AnsiToHtmlExtension());
 
-        $oTemplate = $oTwig->loadTemplate('index');
-        $this->assertEquals('<span style="font-weight:normal;text-decoration:none;color:White;background-color:Black;">Default </span><span style="font-weight:normal;text-decoration:none;color:Blue;background-color:Black;">Blue</span>', $oTemplate->render(array()));
+        $template = $twig->load('index');
+        $this->assertEquals('<span style="font-weight:normal;text-decoration:none;color:White;background-color:Black;">Default </span><span style="font-weight:normal;text-decoration:none;color:Blue;background-color:Black;">Blue</span>', $template->render([]));
 
+        $loader = new ArrayLoader(['index' => '{{ content|ansitohtml }}']);
+        $twig = new Environment($loader, ['debug' => true, 'cache' => false]);
+        $twig->addExtension(new AnsiToHtmlExtension());
 
-        $oLoader = new \Twig_Loader_Array(array('index' => '{{ content|ansitohtml }}'));
-        $oTwig = new \Twig_Environment($oLoader, array('debug' => true, 'cache' => false));
-        $oTwig->addExtension(new \Twig\Extension\AnsiToHtmlExtension());
-
-        $oTemplate = $oTwig->loadTemplate('index');
-        $this->assertEquals('<span style="font-weight:normal;text-decoration:none;color:White;background-color:Black;">Default </span><span style="font-weight:normal;text-decoration:none;color:Blue;background-color:Black;">Blue</span>', $oTemplate->render(array('content' => $sTest)));
+        $template = $twig->load('index');
+        $this->assertEquals('<span style="font-weight:normal;text-decoration:none;color:White;background-color:Black;">Default </span><span style="font-weight:normal;text-decoration:none;color:Blue;background-color:Black;">Blue</span>', $template->render(['content' => $test]));
     }
 }
