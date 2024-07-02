@@ -2,68 +2,68 @@
 
 namespace TestSuite\Twig\TokenParser;
 
-class AnsiToHtmlTokenParserTest extends \Twig_Test_NodeTestCase
-{
+use Twig\Node\AnsiToHtmlNode;
+use Twig\Node\Node;
+use Twig\Node\TextNode;
+use Twig\Test\NodeTestCase;
 
+class AnsiToHtmlTokenParserTest extends NodeTestCase
+{
     public function testConstructor()
     {
 
-        $aParams = array();
-        $sTest = 'Default [34mBlue';
+        $attributes = [];
 
-        $oBody = new \Twig_Node(array(new \Twig_Node_Text($sTest, 1)));
-        $oNode = new \Twig\Node\AnsiToHtmlNode($aParams, $oBody, 1, 'ansitohtml');
+        $test = 'Default [34mBlue';
+        $body = new Node([new TextNode($test, 1)]);
+        $node = new AnsiToHtmlNode(
+            attributes: $attributes,
+            body: $body,
+            lineno: 1,
+        );
 
-        $this->assertEquals($oBody, $oNode->getNode('body'));
+        $this->assertEquals($body, $node->getNode('body'));
     }
 
     public function getTests()
     {
-        $sTest = 'Default [34mBlue';
-        $aTests = array();
-        $aParams = array(
+        $attributes = [];
+
+        $test = 'Default [34mBlue';
+        $body = new Node([new TextNode($test, 1)]);
+        $node = new AnsiToHtmlNode(
+            attributes: $attributes,
+            body: $body,
+            lineno: 1,
         );
 
-        $oBody = new \Twig_Node(array(new \Twig_Node_Text($sTest, 1)));
-        $oNode = new \Twig\Node\AnsiToHtmlNode($aParams, $oBody, 1, 'ansitohtml');
 
-        $aTests['simple_text'] = array($oNode, '// line 1
+        $tests['simple_text'] = [
+            $node,
+            '// line 1
 ob_start();
-echo "' . $sTest . '";
-$sSource = rtrim(ob_get_clean());
-$oHighlighter = new \AnsiEscapesToHtml\Highlighter();
-echo $oHighlighter->toHtml($sSource) . PHP_EOL;');
+yield "' . $test . '";
+echo (new \AnsiEscapesToHtml\Highlighter())->toHtml(rtrim(ob_get_clean())) . PHP_EOL;',
+        ];
 
-        $oBody = new \Twig_Node(array(new \Twig_Node_Text($sTest, 1)));
-        $oNode = new \Twig\Node\AnsiToHtmlNode($aParams, $oBody, 1, 'ansitohtml');
+        $body = new Node([new TextNode($test, 1)]);
+        $node = new AnsiToHtmlNode(
+            attributes: $attributes,
+            body: $body,
+            lineno: 1,
+        );
 
-        $oCompiler = $this->getCompiler(null);
-        $oCompiler->compile($oNode);
+        $compiler = $this->getCompiler(null);
+        $compiler->compile($node);
 
-        $aTests['text_with_leading_indent'] = array($oNode, '// line 1
+        $tests['text_with_leading_indent'] = [
+            $node,
+            '// line 1
 ob_start();
-echo "' . $sTest . '";
-$sSource = rtrim(ob_get_clean());
-$oHighlighter = new \AnsiEscapesToHtml\Highlighter();
-echo $oHighlighter->toHtml($sSource) . PHP_EOL;');
+yield "' . $test . '";
+echo (new \AnsiEscapesToHtml\Highlighter())->toHtml(rtrim(ob_get_clean())) . PHP_EOL;',
+        ];
 
-        return $aTests;
-    }
-
-    /**
-     * @param string $sSource
-     * @param \Twig_Node $oNode
-     * @param \Twig_Environment $oEnvironment
-     * @param boolean $bIsPattern
-     * @return void
-     */
-    public function assertNodeCompilation($sSource, \Twig_Node $oNode, \Twig_Environment $oEnvironment = null, $bIsPattern = false)
-    {
-        if ($bIsPattern) {
-            return parent::assertNodeCompilation($sSource, $oNode, $oEnvironment, $bIsPattern);
-        }
-        $oCompiler = $this->getCompiler($oEnvironment);
-        $oCompiler->compile($oNode);
-        $this->assertSame($sSource, trim($oCompiler->getSource()));
+        return $tests;
     }
 }

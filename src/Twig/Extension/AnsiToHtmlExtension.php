@@ -2,11 +2,15 @@
 
 namespace Twig\Extension;
 
-class AnsiToHtmlExtension extends \Twig_Extension
-{
+use AnsiEscapesToHtml\Highlighter;
+use Twig\Extension\AbstractExtension;
+use Twig\TokenParser\AnsiToHtmlTokenParser;
+use Twig\TwigFilter;
 
+class AnsiToHtmlExtension extends AbstractExtension
+{
     /**
-     * @var \AnsiEscapesToHtml\Highlighter
+     * @var Highlighter
      */
     protected $highlighter;
 
@@ -15,9 +19,9 @@ class AnsiToHtmlExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('ansitohtml', array($this, 'parseAnsiToHtml'), array('is_safe' => array('html'))),
-        );
+        return [
+            new TwigFilter('ansitohtml', [$this, 'parseAnsiToHtml'], ['is_safe' => ['html']]),
+        ];
     }
 
     /**
@@ -29,43 +33,31 @@ class AnsiToHtmlExtension extends \Twig_Extension
         return $this->getHighlighter()->toHtml($sContent);
     }
 
-    /**
-     * @return \AnsiEscapesToHtml\Highlighter
-     * @throws \LogicException
-     */
-    public function getHighlighter()
+    public function getHighlighter(): Highlighter
     {
         if ($this->highlighter === null) {
-            $this->setHighlighter(new \AnsiEscapesToHtml\Highlighter());
+            $this->setHighlighter(new Highlighter());
         }
-        if ($this->highlighter instanceof \AnsiEscapesToHtml\Highlighter) {
+        if ($this->highlighter instanceof Highlighter) {
             return $this->highlighter;
         }
-        throw new \LogicException('Property "highlighter" expects an instance of \AnsiEscapesToHtml\Highlighter, "' . (is_object($this->highlighter) ? get_class($this->highlighter) : gettype($this->highlighter)) . '" defined');
     }
 
-    /**
-     * @param \AnsiEscapesToHtml\Highlighter $oHighlighter
-     * @return \Twig\Extension\AnsiToHtmlExtension
-     */
-    public function setHighlighter(\AnsiEscapesToHtml\Highlighter $oHighlighter)
+    public function setHighlighter(Highlighter $oHighlighter): self
     {
         $this->highlighter = $oHighlighter;
         return $this;
     }
 
     /**
-     * @return array
+     * @return array{0: AnsiToHtmlTokenParser}
      */
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
-        return array(new \Twig\TokenParser\AnsiToHtmlTokenParser());
+        return [new AnsiToHtmlTokenParser()];
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'ansitohtml';
     }

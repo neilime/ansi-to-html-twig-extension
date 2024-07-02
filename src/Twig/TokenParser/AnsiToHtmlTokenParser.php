@@ -2,38 +2,40 @@
 
 namespace Twig\TokenParser;
 
-class AnsiToHtmlTokenParser extends \Twig_TokenParser
+use Twig\Node\AnsiToHtmlNode;
+use Twig\TokenParser\AbstractTokenParser;
+use Twig\Token;
+
+class AnsiToHtmlTokenParser extends AbstractTokenParser
 {
-
-    /**
-     * @param \Twig_Token $oToken
-     * @return \Twig\Node\AnsiToHtmlNode
-     * @throws \Twig_Error_Syntax
-     */
-    public function parse(\Twig_Token $oToken)
+    public function parse(Token $token)
     {
-        $aParams = array();
+        $attributes = [];
 
-        $iLine = $oToken->getLine();
-        $oStream = $this->parser->getStream();
+        $line = $token->getLine();
+        $stream = $this->parser->getStream();
 
-        $oStream->expect(\Twig_Token::BLOCK_END_TYPE);
-        $sBody = $this->parser->subparse(array($this, 'decideBlockEnd'), true);
-        $oStream->expect(\Twig_Token::BLOCK_END_TYPE);
+        $stream->expect(Token::BLOCK_END_TYPE);
+        $body = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+        $stream->expect(Token::BLOCK_END_TYPE);
 
-        return new \Twig\Node\AnsiToHtmlNode($aParams, $sBody, $iLine, $this->getTag());
+        return new AnsiToHtmlNode(
+            attributes: $attributes,
+            body: $body,
+            lineno: $line,
+            tag: $this->getTag(),
+        );
     }
 
-    public function decideBlockEnd(\Twig_Token $oToken)
+    public function decideBlockEnd(Token $token): bool
     {
-        return $oToken->test('endansitohtml');
+        return $token->test('endansitohtml');
     }
 
     /**
      * Gets the tag name associated with this token parser.
-     * @return string
      */
-    public function getTag()
+    public function getTag(): string
     {
         return 'ansitohtml';
     }
