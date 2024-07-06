@@ -1,38 +1,21 @@
-# Usage
+## Twig Extension
 
-## Composer autoloading
+The Twig extension provides the `ansitohtml` tag and filter support.
 
-```php
-// Composer autoloading
-if (!file_exists($sComposerAutoloadPath = __DIR__ . '/vendor/autoload.php')) {
-    throw new \RuntimeException('Composer autoload file "' . $sComposerAutoloadPath . '" does not exist');
-}
-if (false === (include $sComposerAutoloadPath)) {
-    throw new \RuntimeException('An error occured while including composer autoload file "' . $sComposerAutoloadPath . '"');
-}
+### Tag
+
+The `ansitohtml` tag allows to convert ANSI escapes to HTML.
+
+```twig
+{% ansitohtml %}
+Default \e[34mBlue
+{% endansitohtml %}
 ```
 
-## Initialize Highlighter
+### Filter
 
-```php
-$highlighter = new \AnsiEscapesToHtml\Highlighter();
-```
+The `ansitohtml` filter allows to convert ANSI escapes to HTML.
 
-## Convert ANSI to Html
-
-```php
-$ansiOutput = 'Default \e[34mBlue';
-echo $highlighter->toHtml($ansiOutput);
-```
-
-Print :
-
-```html
-<span
-  style="font-weight:normal;text-decoration:none;color:White;background-color:Black;"
-  >Default </span
-><span
-  style="font-weight:normal;text-decoration:none;color:Blue;background-color:Black;"
-  >Blue</span
->
+```twig
+{{ 'Default \e[34mBlue'|ansitohtml }}
 ```

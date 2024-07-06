@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://neilime.github.io/ansi-to-html-twig-extension" target="_blank"><img src="https://repository-images.githubusercontent.com/76674702/0f4fcf80-ece7-11e9-84f1-32287c3d8e95" width="400"></a>
+  <a href="https://neilime.github.io/ansi-to-html-twig-extension" target="_blank"><img src="https://repository-images.githubusercontent.com/76852630/716dd6ce-c977-4ff7-8185-35920024fff9" width="400"></a>
   <h1 align="center">Ansi-To-Html Twig Extension</h1>
 </p>
 
@@ -11,6 +11,14 @@
 [![Sponsor](https://img.shields.io/badge/%E2%9D%A4-Sponsor-ff69b4)](https://github.com/sponsors/neilime)
 
 📢 **Ansi-To-Html Twig Extension** is a [Twig](https://twig.symfony.com) extension to convert ANSI escapes (terminal formatting/color codes) to HTML:
+
+It is based on [ANSI escapes to Html](https://github.com/neilime/ansi-escapes-to-html).
+
+```twig
+{% ansitohtml %}
+Default \e[34mBlue
+{% endansitohtml %}
+```
 
 ## Helping Project
 
