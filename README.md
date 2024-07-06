@@ -3,7 +3,7 @@
   <h1 align="center">Ansi-To-Html Twig Extension</h1>
 </p>
 
-[![Continuous integration](https://github.com/neilime/ansi-to-html-twig-extension/workflows/Continuous%20integration/badge.svg)](https://github.com/neilime/ansi-to-html-twig-extension/actions?query=workflow%3A%22Continuous+integration%22)
+[![Continuous Integration](https://github.com/neilime/ansi-to-html-twig-extension/actions/workflows/main-ci.yml/badge.svg)](https://github.com/neilime/ansi-to-html-twig-extension/actions/workflows/main-ci.yml)
 [![codecov](https://codecov.io/gh/neilime/ansi-to-html-twig-extension/branch/main/graph/badge.svg?token=eMuwgNub7Z)](https://codecov.io/gh/neilime/ansi-to-html-twig-extension)
 [![Latest Stable Version](https://poser.pugx.org/neilime/ansi-to-html-twig-extension/v/stable)](https://packagist.org/packages/neilime/ansi-to-html-twig-extension)
 [![Total Downloads](https://poser.pugx.org/neilime/ansi-to-html-twig-extension/downloads)](https://packagist.org/packages/neilime/ansi-to-html-twig-extension)
