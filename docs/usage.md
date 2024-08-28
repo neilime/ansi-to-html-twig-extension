@@ -1,3 +1,5 @@
+# Usage
+
 ## Twig Extension
 
 The Twig extension provides the `ansitohtml` tag and filter support.

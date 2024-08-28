@@ -11,7 +11,7 @@ setup: build-php install ## Initialize project
 
 build-php: ## Build PHP image
 	@echo "Build php ${PHP_VERSION}"
-	@DOCKER_BUILDKIT=1 docker build -t "twbs-helper-php:${PHP_VERSION}" --build-arg "VERSION=${PHP_VERSION}" --build-arg "UID=${UID}" --build-arg "GID=${GID}" .
+	@DOCKER_BUILDKIT=1 docker build -t "ansi-to-html-twig-extension-php:${PHP_VERSION}" --build-arg "VERSION=${PHP_VERSION}" --build-arg "UID=${UID}" --build-arg "GID=${GID}" .
 
 install: ## Install PHP dependencies for given PHP version
 	rm -f composer.lock
@@ -42,7 +42,7 @@ ci: ## Execute CI scripts for given PHP version
 
 ## Run PHP for given version
 define run-php
-	@docker run -it --rm -v ${PWD}:${PWD} -w ${PWD} twbs-helper-php:${PHP_VERSION} $(1)
+	@docker run -it --rm -v ${PWD}:${PWD} -w ${PWD} ansi-to-html-twig-extension-php:${PHP_VERSION} $(1)
 endef
 
 #############################
