@@ -30,16 +30,31 @@ jobs:
 
           echo -e "theme: jekyll-theme-cayman" > ./_site/_config.yml
 
-          echo -e "---\nlayout: default\ntitle: Home\n---\n" > ./_site/index.md
-          echo "$(sed -r s"/(\{%[^%]+%\})/{% raw %}\1{% endraw %}/g" ./README.md)" >> ./_site/index.md
+          to_title_case() {
+              echo "$1" | awk '{
+                  for (i=1; i<=NF; i++) {
+                      $i = toupper(substr($i, 1, 1)) tolower(substr($i, 2))
+                  }
+                  print
+              }'
+          }
 
-          mkdir -p ./_site/installation
-          echo -e "---\nlayout: default\ntitle: Installation\n---\n" > ./_site/installation/index.md
-          echo "$(sed -r s"/(\{%[^%]+%\})/{% raw %}\1{% endraw %}/g" ./docs/installation.md)" >> ./_site/installation/index.md
+          create_site_page() {
+              page="$1"
+              title="$(to_title_case "$2")"
+              content_path="$3"
+              echo -e "---\nlayout: default\ntitle: $title\n---\n" > "$page"
+              echo "$(sed -r s"/(\{%[^%]+%\})/{% raw %}\1{% endraw %}/g" "$content_path")" >> "$page"
+          }
 
-          mkdir -p ./_site/usage
-          echo -e "---\nlayout: default\ntitle: Usage\n---\n" > ./_site/usage/index.md
-          echo "$(sed -r s"/(\{%[^%]+%\})/{% raw %}\1{% endraw %}/g" ./docs/usage.md)" >> ./_site/usage/index.md
+          create_site_page "./_site/index.md" "Home" "./README.md"
+
+          for filepath in ./docs/*.md; do
+              filename=$(basename -- "$filepath")
+              section="${filename%.*}"
+              mkdir -p "./_site/$section"
+              create_site_page "./_site/$section/index.md" "$section" "$filepath"
+          done
 
       - uses: actions/upload-artifact@v4
         with:
@@ -49,11 +64,12 @@ jobs:
   docs-generate-phpdoc:
     runs-on: ubuntu-latest
     needs: ci
+    container: phpdoc/phpdoc:3
     steps:
       - uses: actions/checkout@v4
 
       - name: 📃 Generate PHP documentation
-        run: docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 -d ./src -t ./_site/phpdoc
+        run: phpdoc run -d ./src -t ./_site/phpdoc
 
       - uses: actions/upload-artifact@v4
         with:
@@ -71,12 +87,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-
       - uses: actions/download-artifact@v4
         with:
-          pattern: 'docs-*'
+          pattern: "docs-*"
           path: ./
-          merge-multiple: true        
+          merge-multiple: true
 
       - name: ⚙️ Setup Pages
         uses: actions/configure-pages@v5

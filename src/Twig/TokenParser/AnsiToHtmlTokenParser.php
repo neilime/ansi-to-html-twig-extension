@@ -23,7 +23,6 @@ class AnsiToHtmlTokenParser extends AbstractTokenParser
             attributes: $attributes,
             body: $body,
             lineno: $line,
-            tag: $this->getTag(),
         );
     }
 
