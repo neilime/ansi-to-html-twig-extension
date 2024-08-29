@@ -1,6 +1,6 @@
 <?php
 
-namespace TestSuite\Twig\TokenParser;
+namespace TestSuite\Twig\Node;
 
 use Twig\Node\AnsiToHtmlNode;
 use Twig\Node\Node;
@@ -27,16 +27,16 @@ class AnsiToHtmlTokenParserTest extends NodeTestCase
 
     public function getTests()
     {
-        $attributes = [];
+        $tests = [];
 
         $test = 'Default [34mBlue';
         $body = new Node([new TextNode($test, 1)]);
+        $attributes = [];
         $node = new AnsiToHtmlNode(
             attributes: $attributes,
             body: $body,
             lineno: 1,
         );
-
 
         $tests['simple_text'] = [
             $node,

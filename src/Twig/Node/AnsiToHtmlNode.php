@@ -2,6 +2,7 @@
 
 namespace Twig\Node;
 
+use InvalidArgumentException;
 use Twig\Node\Node;
 use Twig\Compiler;
 
@@ -10,15 +11,15 @@ use Twig\Compiler;
  */
 class AnsiToHtmlNode extends Node
 {
-    public const TAG = 'ansitohtml';
-
-    public function __construct(array $attributes, Node $body, int $lineno, string $tag = self::TAG)
+    /**
+     * @param array{} $attributes
+     */
+    public function __construct(array $attributes, Node $body, int $lineno)
     {
         parent::__construct(
             nodes: ['body' => $body],
             attributes: $attributes,
             lineno: $lineno,
-            tag: $tag,
         );
     }
 

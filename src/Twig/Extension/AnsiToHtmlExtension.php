@@ -15,7 +15,7 @@ class AnsiToHtmlExtension extends AbstractExtension
     protected $highlighter;
 
     /**
-     * @return array
+     * @return TwigFilter[]
      */
     public function getFilters()
     {
