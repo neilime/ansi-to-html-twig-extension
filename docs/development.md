@@ -2,7 +2,7 @@
 
 ## Setup
 
-Default PHP version is 8.3. You can override it by setting `PHP_VERSION` as Makefile argument. Example: `make PHP_VERSION=8.1 setup`.
+You can override default PHP version by setting `PHP_VERSION` as Makefile argument. Example: `make PHP_VERSION=8.2 setup`.
 
 ```sh
 make setup
