@@ -10,6 +10,8 @@ on:
       - main
   merge_group:
 
+permissions: {}
+
 jobs:
   ci:
     name: Continuous Integration
