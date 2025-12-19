@@ -37,7 +37,7 @@ jobs:
       - name: 📃 Generate PHP documentation
         run: phpdoc run -d ./src -t $ARTIFACT_PATH/phpdoc
 
-      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         id: upload-artifact
         with:
           name: docs-phpdoc
@@ -58,19 +58,19 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           artifact-ids: ${{ needs.docs-generate-phpdoc.outputs.artifact-id }}
           path: ${{ needs.docs-generate-phpdoc.outputs.artifact-path }}
 
-      - uses: hoverkraft-tech/ci-github-publish/actions/deploy/jekyll@44e0f1bacebf3711bf90895fc45d815e9fe582e8 # 0.18.0
+      - uses: hoverkraft-tech/ci-github-publish/actions/deploy/jekyll@642cdb54493d05debdc1394f4bfd7365f82e7bf1 # 0.18.2
         id: build
         with:
           site-path: ${{ needs.docs-generate-phpdoc.outputs.artifact-path }}
           pages: |
             ./docs/*.md
 
-      - uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@44e0f1bacebf3711bf90895fc45d815e9fe582e8 # 0.18.0
+      - uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@642cdb54493d05debdc1394f4bfd7365f82e7bf1 # 0.18.2
         id: deployment
         with:
           build-path: ${{ steps.build.outputs.build-path }}
