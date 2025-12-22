@@ -16,7 +16,7 @@ class AnsiToHtmlTokenParser extends AbstractTokenParser
         $stream = $this->parser->getStream();
 
         $stream->expect(Token::BLOCK_END_TYPE);
-        $body = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+        $body = $this->parser->subparse($this->decideBlockEnd(...), true);
         $stream->expect(Token::BLOCK_END_TYPE);
 
         return new AnsiToHtmlNode(

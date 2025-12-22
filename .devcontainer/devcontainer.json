@@ -21,6 +21,9 @@
       ],
       "mcp": {
         "servers": {}
+      },
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
   }
