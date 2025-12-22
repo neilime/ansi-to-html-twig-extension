@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: composer
-    versioning-strategy: widen
+    versioning-strategy: increase
     directories:
       - "/"
       - "/tools"
@@ -26,7 +26,9 @@ updates:
           - "*"
 
   - package-ecosystem: github-actions
-    directory: "/"
+    directories:
+      - "/"
+      - "/.github/workflows/actions/**/*"
     schedule:
       interval: weekly
       day: friday

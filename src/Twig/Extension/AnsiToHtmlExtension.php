@@ -6,11 +6,12 @@ use AnsiEscapesToHtml\Highlighter;
 use Twig\Extension\AbstractExtension;
 use Twig\TokenParser\AnsiToHtmlTokenParser;
 use Twig\TwigFilter;
+use LogicException;
 
 class AnsiToHtmlExtension extends AbstractExtension
 {
     /**
-     * @var Highlighter
+     * @var ?Highlighter
      */
     protected $highlighter;
 
@@ -20,7 +21,7 @@ class AnsiToHtmlExtension extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('ansitohtml', [$this, 'parseAnsiToHtml'], ['is_safe' => ['html']]),
+            new TwigFilter('ansitohtml', $this->parseAnsiToHtml(...), ['is_safe' => ['html']]),
         ];
     }
 
@@ -41,6 +42,7 @@ class AnsiToHtmlExtension extends AbstractExtension
         if ($this->highlighter instanceof Highlighter) {
             return $this->highlighter;
         }
+        throw new LogicException('Highlighter is not set.');
     }
 
     public function setHighlighter(Highlighter $oHighlighter): self
