@@ -30,12 +30,12 @@ Default \e[34mBlue
 
 ## Documentation
 
-### [Installation](https://neilime.github.io/ansi-to-html-twig-extension/installation)
+### [Installation](./docs/installation.md)
 
-### [Usage](https://neilime.github.io/ansi-to-html-twig-extension/usage)
+### [Usage](./docs/usage.md)
+
+### [Development](./docs/development.md)
 
 ### [Code Coverage](https://codecov.io/gh/neilime/ansi-to-html-twig-extension)
 
 ### [PHP Doc](https://neilime.github.io/ansi-to-html-twig-extension/phpdoc)
-
-### [Development](https://neilime.github.io/ansi-to-html-twig-extension/development)
