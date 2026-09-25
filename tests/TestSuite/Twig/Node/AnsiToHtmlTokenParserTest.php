@@ -27,6 +27,11 @@ class AnsiToHtmlTokenParserTest extends NodeTestCase
 
     public function getTests()
     {
+        return self::provideTests();
+    }
+
+    public static function provideTests(): iterable
+    {
         $tests = [];
 
         $test = 'Default [34mBlue';
@@ -52,9 +57,6 @@ echo (new \AnsiEscapesToHtml\Highlighter())->toHtml(rtrim(ob_get_clean())) . PHP
             body: $body,
             lineno: 1,
         );
-
-        $compiler = $this->getCompiler(null);
-        $compiler->compile($node);
 
         $tests['text_with_leading_indent'] = [
             $node,
